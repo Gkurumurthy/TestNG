@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--Suite -->
+<suite name="DemoSuite">
+  <parameter name = "logedinUserName" value = "bdoaqm_uatnudhyas"/>
+   <!-- Test -->
+    <test name="TestNG Test">
+        <!-- Test Class -->
+        <classes>
+            <class name="TestngDemo"/>
+        </classes>
+    </test>
+</suite>
