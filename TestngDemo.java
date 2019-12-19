@@ -24,17 +24,20 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class TestngDemo {
 
     
         public WebDriver driver;
         public String url="https://www.lambdatest.com/";
+        int count;
         
     @BeforeSuite
     public void setUp()
     {   
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\navyug\\workspace\\QAPractise\\src\\ChromeDriver\\chromedriver.exe");
-        driver=new ChromeDriver();
+    	WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         System.out.println("The setup process is completed");
     }
@@ -58,9 +61,9 @@ public class TestngDemo {
     public void checkLogin()
     {
           driver.get("https://accounts.lambdatest.com/login");
-          driver.findElement(By.xpath("//input[@name='email']")).sendKeys("sadhvisingh24@gmail.com");
-          driver.findElement(By.xpath("//input[@name='password']")).sendKeys("activa9049");
-          driver.findElement(By.xpath("//*[@id='app']/section/form/div/div/button")).click();
+          driver.findElement(By.xpath("//input[@name='email']")).sendKeys("solbct200@gmail.com");
+          driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Test@1234");
+          driver.findElement(By.xpath("//button[@class='btn btn-dark submit-btn']")).click();
           System.out.println("The login process on lamdatest is completed");
     }
     
@@ -77,11 +80,13 @@ public class TestngDemo {
     @AfterMethod
     public void screenShot() throws IOException
     {
-        TakesScreenshot scr= ((TakesScreenshot)driver);
-        File file1= scr.getScreenshotAs(OutputType.FILE);
-            
-        FileUtils.copyFile(file1, new File("C:\\Users\\navyug\\workspace\\QAPractise\\test-output\\test1.PNG"));
-        System.out.println("Screenshot of the test is taken");
+    	TakesScreenshot ts = (TakesScreenshot)driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        count++;
+        String screenShotName = Integer.toString(count);
+		 String dest = System.getProperty("user.dir") +"/reports/TestCase_"+screenShotName+".png";
+        File destination = new File(dest);
+        FileUtils.copyFile(source, destination);
     }
     
     @AfterClass
