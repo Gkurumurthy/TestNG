@@ -32,7 +32,7 @@ public class TestngDemo {
         public WebDriver driver;
         public String url="https://www.lambdatest.com/";
         int count;
-        
+      //beforesuite
     @BeforeSuite
     public void setUp()
     {   
